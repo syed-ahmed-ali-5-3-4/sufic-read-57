@@ -1,11 +1,11 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.99bb1b68e01046c1a305d00b6a807f1e',
-  appName: 'sufic-read-93',
+  appId: 'app.lovable.eb9e8c8eb3af4894a27116c781fe729f',
+  appName: 'sufic-read-57',
   webDir: 'dist',
   server: {
-    url: "https://99bb1b68-e010-46c1-a305-d00b6a807f1e.lovableproject.com?forceHideBadge=true",
+    url: "https://eb9e8c8e-b3af-4894-a271-16c781fe729f.lovableproject.com?forceHideBadge=true",
     cleartext: true
   },
   plugins: {
