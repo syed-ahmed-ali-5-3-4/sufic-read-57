@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -20,6 +20,13 @@ export const BookmarksPanel = ({ isOpen, onClose, onNavigateToChapter }: Bookmar
   const [editingBookmark, setEditingBookmark] = useState<string | null>(null);
   const [editNote, setEditNote] = useState('');
   const { toast } = useToast();
+
+  // Debug logging when panel opens
+  useEffect(() => {
+    if (isOpen) {
+      console.log('BookmarksPanel opened with bookmarks:', bookmarks);
+    }
+  }, [isOpen, bookmarks]);
 
   const formatDate = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString('en-US', {
@@ -63,7 +70,7 @@ export const BookmarksPanel = ({ isOpen, onClose, onNavigateToChapter }: Bookmar
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-2xl max-h-[80vh] bg-card-elevated border-border">
+        <DialogContent className="max-w-2xl max-h-[80vh] bg-card-elevated border-border" aria-describedby="bookmarks-description">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 font-amiri gradient-text">
               <Bookmark className="h-5 w-5" />
@@ -73,6 +80,9 @@ export const BookmarksPanel = ({ isOpen, onClose, onNavigateToChapter }: Bookmar
               </Badge>
             </DialogTitle>
           </DialogHeader>
+          <div id="bookmarks-description" className="sr-only">
+            View and manage your saved bookmarks from the book chapters.
+          </div>
 
           <ScrollArea className="h-[500px]">
             <div className="space-y-4">
@@ -139,10 +149,13 @@ export const BookmarksPanel = ({ isOpen, onClose, onNavigateToChapter }: Bookmar
 
       {/* Edit Note Dialog */}
       <Dialog open={!!editingBookmark} onOpenChange={() => setEditingBookmark(null)}>
-        <DialogContent className="bg-card-elevated border-border">
+        <DialogContent className="bg-card-elevated border-border" aria-describedby="edit-note-description">
           <DialogHeader>
             <DialogTitle className="font-amiri gradient-text">Edit Bookmark Note</DialogTitle>
           </DialogHeader>
+          <div id="edit-note-description" className="sr-only">
+            Add or edit a note for your bookmark to help you remember why you saved this chapter.
+          </div>
           
           <div className="space-y-4">
             <Textarea

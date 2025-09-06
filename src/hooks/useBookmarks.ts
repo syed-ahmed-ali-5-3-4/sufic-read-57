@@ -39,7 +39,12 @@ export const useBookmarks = () => {
       note
     };
     
-    setBookmarks(prev => [...prev, newBookmark]);
+    setBookmarks(prev => {
+      const updated = [...prev, newBookmark];
+      console.log('Adding bookmark:', newBookmark);
+      console.log('Updated bookmarks:', updated);
+      return updated;
+    });
     return newBookmark.id;
   };
 

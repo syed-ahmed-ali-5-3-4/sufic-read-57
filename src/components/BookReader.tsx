@@ -76,6 +76,10 @@ export const BookReader = () => {
   const chapter = currentChapters[currentChapter];
 
   const toggleBookmark = () => {
+    console.log('Current chapter:', chapter);
+    console.log('Current bookmarks:', bookmarks);
+    console.log('Is chapter bookmarked?', isChapterBookmarked(chapter.id));
+    
     if (isChapterBookmarked(chapter.id)) {
       // Find the actual bookmark for this chapter and remove it
       const chapterBookmarks = bookmarks.filter(bookmark => bookmark.chapterId === chapter.id);
@@ -87,6 +91,7 @@ export const BookReader = () => {
         description: `Removed bookmark from "${chapter.title}"`,
       });
     } else {
+      console.log('Adding bookmark for chapter:', chapter.id, chapter.title);
       addBookmark(chapter.id, chapter.title, 0);
       toast({
         title: "Bookmark Added",
